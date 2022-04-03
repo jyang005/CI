@@ -173,7 +173,7 @@ public class Book implements Cloneable, Iterable<Author> {
    * they have the same ISBN.
    *
    * @param obj object to be compared for equality with this duration
-   * @return <tt>true</tt> if the specified object is equal to this one
+   * @return <code>true</code> if the specified object is equal to this one
    */
   public boolean equals(Object obj) {
     if (!(obj instanceof Book)) {

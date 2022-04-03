@@ -20,3 +20,15 @@ test {
     ignoreFailures = true
     useJUnitPlatform()
 }
+
+task reports(dependsOn:['javadoc', 'test']){
+    copy{
+        from "build/docs"
+        into "build/reports/javadocs"
+            }
+            copy{
+                from "src/main/html/"
+                into "build/reports"
+            }
+    
+}
