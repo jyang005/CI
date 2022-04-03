@@ -32,7 +32,7 @@ task reports(dependsOn:['javadoc', 'test']){
             }
     
 }
-def websiteRepo='https://github.com/jyang005/website-repository.git'  
+def websiteRepo='https://github.com/jyang005/CI.git'  
 
 task deployReports(dependsOn:['reports']){
 
