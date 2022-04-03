@@ -32,3 +32,38 @@ task reports(dependsOn:['javadoc', 'test']){
             }
     
 }
+def websiteRepo='https://github.com/jyang005/website-repository.git'  
+
+task deployReports(dependsOn:['reports']){
+
+	doLast {
+	delete 'build/gh-pages'
+        exec {
+        
+            workingDir = '.'
+            commandLine = ['git', 'clone', websiteRepo, 'build/gh-pages']
+        }
+    }
+	
+	copy{
+	
+ 		from "build/reports"
+		into "build/gh-pages"
+		}
+		
+        exec {
+            workingDir = 'build/gh-pages'                                
+            commandLine 'git', 'add', '-f', '.'
+        }
+        exec {
+            workingDir = 'build/gh-pages'
+            commandLine 'git', 'commit', '-m', 'Updating-webpages'
+        }
+        exec {
+            workingDir = 'build/gh-pages'
+            commandLine  'cmd', 'git', 'push'
+        }
+        
+ 
+
+}
