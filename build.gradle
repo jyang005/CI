@@ -36,6 +36,7 @@ def websiteRepo='https://github.com/jyang005/website-repository.git'
 
 task deployReports(dependsOn:['reports']){
 
+
 	doLast {
 	delete 'build/gh-pages'
         exec {
@@ -53,15 +54,15 @@ task deployReports(dependsOn:['reports']){
 		
         exec {
             workingDir = 'build/gh-pages'                                
-            commandLine 'git', 'add', '-f', '.'
+            commandLine = ['git', 'add', '-f', '.']
         }
         exec {
             workingDir = 'build/gh-pages'
-            commandLine 'git', 'commit', '-m', 'Updating-webpages'
+            commandLine =['git', 'commit', '-m', 'Updating-webpages']
         }
         exec {
             workingDir = 'build/gh-pages'
-            commandLine  'cmd', 'git', 'push'
+            commandLine =['cmd', 'git', 'push']
         }
         
  
