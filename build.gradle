@@ -32,37 +32,41 @@ task reports(dependsOn:['javadoc', 'test']){
             }
     
 }
-def websiteRepo='https://github.com/jyang005/CI.git'  
+
+
+def websiteRepo='git@github.com:jyang005/website-repository.git' 
 
 task deployReports(dependsOn:['reports']){
-doLast {
-	delete 'build/gh-pages'
-        exec {
-        
+
+	doLast{ 
+          delete 'build/gh-pages'
+          exec {
             workingDir = '.'
             commandLine = ['git', 'clone', websiteRepo, 'build/gh-pages']
         }
-    }
-    
-
-	copy{
+        }
+    copy{
 	
  		from "build/reports"
 		into "build/gh-pages"
 		}
+		
+          group = "Reporting"
+    description  'Copies reports to the website repo and pushes to GitHub'
         exec {
             workingDir = 'build/gh-pages'                                
-            commandLine = ['git', 'add', '-f', '.']
+            commandLine = ['git', 'add','-f', '.']
         }
         exec {
             workingDir = 'build/gh-pages'
-            commandLine = ['git', 'commit', '-m', 'Updating-webpages']
+            commandLine = ['git', 'commit', '-m', 'Updating-webpages']   
         }
         exec {
             workingDir = 'build/gh-pages'
-            commandLine = ['cmd', 'git', 'push']
+            commandLine = ['git', 'push']
         }
         
- 
+    }
+    
 
-}
+
